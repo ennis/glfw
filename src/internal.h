@@ -401,6 +401,7 @@ struct _GLFWwindow
         GLFWcharfun             character;
         GLFWcharmodsfun         charmods;
         GLFWdropfun             drop;
+		GLFWpointerfun			pointer;
     } callbacks;
 
     // This is defined in the window API's platform.h
@@ -974,6 +975,8 @@ void _glfwInputError(int error, const char* format, ...);
  *  @ingroup event
  */
 void _glfwInputDrop(_GLFWwindow* window, int count, const char** names);
+
+void _glfwInputPointer(_GLFWwindow* window, const GLFWpointerevent* pointerevent);
 
 /*! @brief Notifies shared code of a joystick connection/disconnection event.
  *  @param[in] jid The joystick that was connected or disconnected.
