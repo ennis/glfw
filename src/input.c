@@ -124,6 +124,13 @@ void _glfwInputDrop(_GLFWwindow* window, int count, const char** paths)
         window->callbacks.drop((GLFWwindow*) window, count, paths);
 }
 
+
+void _glfwInputPointer(_GLFWwindow* window, const GLFWpointerevent* pointerevent)
+{
+	if (window->callbacks.pointer)
+		window->callbacks.pointer((GLFWwindow*)window, pointerevent);
+}
+
 void _glfwInputJoystickChange(int jid, int event)
 {
     if (_glfw.callbacks.joystick)

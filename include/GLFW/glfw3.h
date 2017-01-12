@@ -1284,6 +1284,7 @@ typedef void (* GLFWcharmodsfun)(GLFWwindow*,unsigned int,int);
  */
 typedef void (* GLFWdropfun)(GLFWwindow*,int,const char**);
 
+
 /*! @brief The function signature for monitor configuration callbacks.
  *
  *  This is the function signature for monitor configuration callback functions.
@@ -1316,6 +1317,26 @@ typedef void (* GLFWmonitorfun)(GLFWmonitor*,int);
  *  @ingroup input
  */
 typedef void (* GLFWjoystickfun)(int,int);
+
+// event (down, up, move) pos (x,y) pressure, tilt (X,Y)
+typedef struct GLFWpointerevent
+{
+	int action;	
+	int id;
+	int button;
+	int type;
+	uint32_t buttons;	// bitfield
+	double x;
+	double y;
+	double dx;
+	double dy;
+	int mask;
+	double pressure;
+	double tiltX;
+	double tiltY;
+} GLFWpointerevent;
+
+typedef void(*GLFWpointerfun)(GLFWwindow*, const GLFWpointerevent*);
 
 /*! @brief Video mode type.
  *
@@ -4634,6 +4655,8 @@ GLFWAPI int glfwGetPhysicalDevicePresentationSupport(VkInstance instance, VkPhys
 GLFWAPI VkResult glfwCreateWindowSurface(VkInstance instance, GLFWwindow* window, const VkAllocationCallbacks* allocator, VkSurfaceKHR* surface);
 
 #endif /*VK_VERSION_1_0*/
+
+GLFWAPI GLFWpointerfun glfwSetPointerEventCallback(GLFWwindow* window, GLFWpointerfun pfun);
 
 
 /*************************************************************************

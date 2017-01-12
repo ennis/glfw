@@ -941,6 +941,17 @@ GLFWAPI GLFWframebuffersizefun glfwSetFramebufferSizeCallback(GLFWwindow* handle
     return cbfun;
 }
 
+GLFWAPI GLFWpointerfun glfwSetPointerEventCallback(GLFWwindow* handle, GLFWpointerfun pfun)
+{
+	_GLFWwindow* window = (_GLFWwindow*)handle;
+	assert(window != NULL);
+
+	_GLFW_REQUIRE_INIT_OR_RETURN(NULL);
+	_GLFW_SWAP_POINTERS(window->callbacks.pointer, pfun);
+	return pfun;
+}
+
+
 GLFWAPI void glfwPollEvents(void)
 {
     _GLFW_REQUIRE_INIT();
