@@ -489,7 +489,7 @@ static void processPointerEvent(_GLFWwindow* window, UINT msg, WPARAM wParam, LP
 		GetPointerPenInfoHistory(pointerid, &entriesCount, penInfos);
 		for (int i = entriesCount - 1; i >= 0; --i) {
 			pointerevent.mask = penInfos[i].penMask;
-			pointerevent.pressure = (double)penInfos[i].pressure;
+			pointerevent.pressure = (double)penInfos[i].pressure / 1024.0;
 			POINT clientPoint = penInfos[i].pointerInfo.ptPixelLocation;
 			ScreenToClient(window->win32.handle, &clientPoint);
 			_glfwInputPointer(window, &pointerevent);
@@ -947,39 +947,36 @@ static LRESULT CALLBACK windowProc(HWND hWnd, UINT uMsg,
 
 		case WM_POINTERENTER:
 		{
-			//printf("WM_POINTERENTER\n"); 
 			processPointerEvent(window, uMsg, wParam, lParam);
 			return 0;
 		}
 
 		case WM_POINTERLEAVE:
 		{
-			//printf("WM_POINTERLEAVE\n");
 			processPointerEvent(window, uMsg, wParam, lParam);
 			return 0;
 		}
 
 		case WM_POINTERUP:
 		{
-			//printf("WM_POINTERUP\n");
 			processPointerEvent(window, uMsg, wParam, lParam);
-			return 0;
+			//return 0;
+			break;
 		}
 
 		case WM_POINTERDOWN:
 		{
-			//printf("WM_POINTERDOWN\n");
 			processPointerEvent(window, uMsg, wParam, lParam);
-			return 0;
+			//return 0;
+			break;
 		}
 
 		case WM_POINTERUPDATE:
 		{
-			//printf("WM_POINTERUPDATE\n");
 			processPointerEvent(window, uMsg, wParam, lParam);
 			updateCursorImage(window);
-			//printf("pointerid=%i\n", pointerid);
-			return 0;
+			//return 0;
+			break;
 		}
 
     }
